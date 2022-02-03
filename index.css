@@ -1,0 +1,70 @@
+
+
+body {
+    margin: 0px;
+}
+
+#navbar {
+    padding: 1%;
+    font-size: 22px;
+    display: flex;
+    background-color: black;
+    color: white;
+}
+
+#logo img {
+
+    width: 80%;
+    padding: 2px;
+}
+
+#profile-img {
+
+    width: 90%;
+    border-radius: 50%;
+    height: 80px;
+
+}
+
+#list li {
+
+    display: inline;
+    margin-right: 2%;
+}
+
+#search {
+    width: 20%;
+    padding: 12px;
+}
+
+#logo {
+    width: 5%;
+    text-align: right;
+}
+
+#options {
+
+    width: 75%;
+}
+
+#profile {
+
+    width: 5%;
+}
+
+a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+input{
+    width: 100%;
+    margin-top: 3%;
+    height: 20px;
+    font-size: 22px;
+    padding: 4px;
+}
+
+.repoDiv a{
+    color: none;
+}

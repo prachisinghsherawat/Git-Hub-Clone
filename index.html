@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style/index.css">
+</head>
+
+<body>
+    <div class="container"></div>
+
+    <div id="main">
+        <button id="repo-btn">Get User Repo</button>
+    </div>
+    <div class="repoDiv"></div>
+</body>
+
+</html>
+<script type="module">
+
+    import navbar from "./componant/navbar.js"
+    let container = document.querySelector('.container')
+    container.innerHTML = navbar();
+
+    import getUser from "./scripts/getUser.js"
+
+
+    let input = document.getElementById("search-input");
+    input.addEventListener('keypress', searchUser);
+
+    let btn = document.getElementById('repo-btn');
+    btn.addEventListener('click', getUserRepo)
+
+    async function searchUser(event) {
+        // console.log("event",event);
+
+        if (event.key === "Enter") {
+            //console.log("event :",event)
+
+
+            let query = input.value
+
+            let response = await getUser(query)
+            console.log("response:", response);
+            //getUserRepo(response);
+
+            let { avatar_url } = response;
+
+            document.getElementById('profile-img').src = avatar_url
+
+
+        }
+
+    }
+
+    async function getUserRepo() {
+
+
+        let query = document.querySelector("#search-input").value;
+
+
+        try {
+            
+            let res = await fetch(`https://api.github.com/users/${query}/repos`)
+            let repo_data = await res.json();
+
+            showRepo(repo_data)
+            console.log("repo_data", repo_data);
+        }
+        catch(error) {
+            console.log("error :",error);
+        }
+
+    }
+
+    
+
+    //let repoDiv = document.querySelector(".repoDiv");
+
+    function showRepo(data){
+        //repoDiv.innerHTML =""
+
+        data.map(({name,html_url}) =>{
+
+            console.log(name);
+
+            let a = document.createElement("a"); 
+            a.innerText = name;
+            a.href = html_url;
+            a.style.color = "blue";
+            a.style.fontSize = "45px";
+            a.style.display = "block";
+            a.style.marginLeft = "10%";
+
+            console.log(a);
+            
+            document.querySelector(".repoDiv").append(a);
+        })
+    }
+
+</script>
